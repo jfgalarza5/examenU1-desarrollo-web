@@ -17,36 +17,54 @@
         </div>
     @endif
 
-    <form action="{{ route('computador.update', $computador->id) }}" method="POST">
+    <form action="{{ route('computador.update', $computador->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
         <div class="mb-3">
-            <label for="marca" class="form-label">Marca</label>
-            <input type="text" name="marca" class="form-control" value="{{ old('marca', $computador->marca) }}" required>
+            <label class="form-label">Código de Tienda</label>
+            <input type="text" name="codigo_tienda" class="form-control" value="{{ old('codigo_tienda', $computador->codigo_tienda) }}" required>
         </div>
 
         <div class="mb-3">
-            <label for="modelo" class="form-label">Modelo</label>
-            <input type="text" name="modelo" class="form-control" value="{{ old('modelo', $computador->modelo) }}" required>
+            <label class="form-label">Almacenamiento</label>
+            <input type="text" name="almacenamiento" class="form-control" value="{{ old('almacenamiento', $computador->almacenamiento) }}" required>
         </div>
 
         <div class="mb-3">
-            <label for="precio" class="form-label">Precio (USD)</label>
+            <label class="form-label">RAM</label>
+            <input type="text" name="ram" class="form-control" value="{{ old('ram', $computador->ram) }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Tarjeta Gráfica</label>
+            <input type="text" name="tarjeta_grafica" class="form-control" value="{{ old('tarjeta_grafica', $computador->tarjeta_grafica) }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Procesador</label>
+            <input type="text" name="procesador" class="form-control" value="{{ old('procesador', $computador->procesador) }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Precio (USD)</label>
             <input type="number" name="precio" step="0.01" class="form-control" value="{{ old('precio', $computador->precio) }}" required>
         </div>
 
         <div class="mb-3">
-            <label for="fecha_compra" class="form-label">Fecha de Compra</label>
-            <input type="date" name="fecha_compra" class="form-control" value="{{ old('fecha_compra', $computador->fecha_compra) }}" required>
+            <label class="form-label">Descripción</label>
+            <textarea name="descripcion" class="form-control" rows="3">{{ old('descripcion', $computador->descripcion) }}</textarea>
         </div>
 
         <div class="mb-3">
-            <label for="en_uso" class="form-label">¿Está en uso?</label>
-            <select name="en_uso" class="form-select" required>
-                <option value="1" {{ $computador->en_uso ? 'selected' : '' }}>Sí</option>
-                <option value="0" {{ !$computador->en_uso ? 'selected' : '' }}>No</option>
-            </select>
+            <label class="form-label">Imagen Actual</label><br>
+            @if ($computador->imagen)
+                <img src="{{ asset($computador->imagen) }}" alt="Imagen" width="100" class="mb-2"><br>
+            @else
+                <em>No hay imagen</em><br>
+            @endif
+            <label class="form-label mt-2">Cambiar Imagen</label>
+            <input type="text" name="imagen" class="form-control">
         </div>
 
         <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar cambios</button>

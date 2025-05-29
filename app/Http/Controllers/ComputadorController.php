@@ -7,28 +7,28 @@ use Illuminate\Http\Request;
 
 class ComputadorController extends Controller
 {
-    // Mostrar todos los computadores
     public function index()
     {
         $computadores = Computador::all();
         return view('computador.index', compact('computadores'));
     }
 
-    // Mostrar formulario para crear nuevo computador
     public function create()
     {
         return view('computador.create');
     }
 
-    // Guardar nuevo computador
     public function store(Request $request)
     {
         $request->validate([
-            'marca' => 'required|string|max:255',
-            'modelo' => 'required|string|max:255',
+            'codigo_tienda' => 'required|string|max:255',
+            'almacenamiento' => 'required|string|max:255',
+            'ram' => 'required|string|max:255',
+            'tarjeta_grafica' => 'required|string|max:255',
             'precio' => 'required|numeric',
-            'fecha_compra' => 'required|date',
-            'en_uso' => 'required|boolean',
+            'descripcion' => 'nullable|string',
+            'imagen' => 'nullable|string|max:255',
+            'procesador' => 'required|string|max:255',
         ]);
 
         Computador::create($request->all());
@@ -36,27 +36,27 @@ class ComputadorController extends Controller
         return redirect()->route('computador.index')->with('success', 'Computador creado correctamente');
     }
 
-    // Mostrar un computador
     public function show(Computador $computador)
     {
         return view('computador.show', compact('computador'));
     }
 
-    // Mostrar formulario para editar un computador
     public function edit(Computador $computador)
     {
         return view('computador.edit', compact('computador'));
     }
 
-    // Actualizar computador
     public function update(Request $request, Computador $computador)
     {
         $request->validate([
-            'marca' => 'required|string|max:255',
-            'modelo' => 'required|string|max:255',
+            'codigo_tienda' => 'required|string|max:255',
+            'almacenamiento' => 'required|string|max:255',
+            'ram' => 'required|string|max:255',
+            'tarjeta_grafica' => 'required|string|max:255',
             'precio' => 'required|numeric',
-            'fecha_compra' => 'required|date',
-            'en_uso' => 'required|boolean',
+            'descripcion' => 'nullable|string',
+            'imagen' => 'nullable|string|max:255',
+            'procesador' => 'required|string|max:255',
         ]);
 
         $computador->update($request->all());
@@ -64,7 +64,6 @@ class ComputadorController extends Controller
         return redirect()->route('computador.index')->with('success', 'Computador actualizado correctamente');
     }
 
-    // Eliminar computador
     public function destroy(Computador $computador)
     {
         $computador->delete();
@@ -84,16 +83,17 @@ class ComputadorController extends Controller
         return view('computador.busqueda', compact('computador'));
     }
 
-
-
     public function actualizar(Request $request, $id)
     {
         $request->validate([
-            'marca' => 'required|string|max:255',
-            'modelo' => 'required|string|max:255',
+            'codigo_tienda' => 'required|string|max:255',
+            'almacenamiento' => 'required|string|max:255',
+            'ram' => 'required|string|max:255',
+            'tarjeta_grafica' => 'required|string|max:255',
             'precio' => 'required|numeric',
-            'fecha_compra' => 'required|date',
-            'en_uso' => 'required|boolean',
+            'descripcion' => 'nullable|string',
+            'imagen' => 'nullable|string|max:255',
+            'procesador' => 'required|string|max:255',
         ]);
 
         $computador = Computador::findOrFail($id);
@@ -101,4 +101,6 @@ class ComputadorController extends Controller
 
         return redirect()->route('computador.buscar')->with('success', 'Computador actualizado correctamente');
     }
+
+    
 }

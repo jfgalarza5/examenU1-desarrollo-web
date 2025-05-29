@@ -9,17 +9,16 @@ class Computador extends Model
 {
     use HasFactory;
 
-    // Laravel infiere que la tabla se llama "computadors", pero la nuestra es "computador"
     protected $table = 'computador';
 
-    // Si no usas campos de tiempo automáticos, puedes desactivarlos:
-    // public $timestamps = false;
-
     protected $fillable = [
-        'marca',
-        'modelo',
+        'codigo_tienda',
+        'almacenamiento',
+        'ram',
+        'tarjeta_grafica',
         'precio',
-        'fecha_compra',
-        'en_uso',
+        'descripcion',
+        'imagen',
+        'procesador',
     ];
 }
